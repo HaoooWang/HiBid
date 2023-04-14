@@ -24,23 +24,24 @@ $\lambda$-generalization for adaptive bidding strategy in response to changing b
     python setup.py develop
     ```
 ## :computer: Training
-To generate dataset, use:
+To generate dataset:
 ```
 cd simulator
 python auction_simulator.py
 ```
 
-To train HiBid, use:
+To train Hibid:
 ```
 cd /algorithm/HiBid
-python main.py --dataset your_dataset_path --task_type high -constraint_loss_weight 0.01_0.01_0.01_0.01 --use_batch_loss  --gamma 1 --embed_dim
-python main.py --dataset your_dataset_path --task_type low --use_cpcas --use_bcorle --bcorle_lambda_num 50 -constraint_loss_weight 0.01_0.01_0.01_0.01 --use_batch_loss
- 
+python main.py --train_data dataset_path --task_type high -constraint_loss_weight 0.01_0.01_0.01_0.01 --use_batch_loss  --gamma 1 --embed_dim 8 --task train  --embed_dim 8 --deep_layers 64,128,256 --use_dense_table --use_cate_feature True --bit 22 --learning_rate 0.0001 --update_interval 300 --use_bn False 
+
+python main.py --train_data dataset_path --task_type low --use_cpcas --use_bcorle --bcorle_lambda_num 50 -constraint_loss_weight 0.01_0.01_0.01_0.01 --use_batch_loss --task train --gamma 0.999 --embed_dim 8 --deep_layers 64,128,256 --use_dense_table --use_cate_feature True --bit 22 --learning_rate 0.0001 --update_interval 300 --use_bn False --high_model_dir ./high_model
 ```
 
-### 
+### Dataset
+The experimental dataset is presently inaccessible due to privacy regulations.
+The synthetic dataset is avalable on https://drive.google.com/drive/folders/11TmSXZFtwiXhy1kyQdvEvzc5Mu-cHI7S?usp=share_link.
 ### Auction Simulator
-The synthetic dataset are avalable on https://drive.google.com/drive/folders/11TmSXZFtwiXhy1kyQdvEvzc5Mu-cHI7S?usp=share_link.
 
 - **Advertisers and ad requests initialization**. The simulator first randomly generate some advertisers, who are categorized into 20 types denotes the varying business conditions of advertisers. Each advertisers possesses a total budget, expected CPC, historical CTR, CVR, GMV etc., which are sampled from a Gaussian distribution based on their respective category. Then, the simulator initializes the total ad requests in a day, each of which belongs to one of 4 channels. Note that the number of ad requests and arrival distribution of each channel are kept relatively consistent with the online platform. Subsequently, the simulator replays these ad requests in chronological order and simulates advertisers' auction as follow.
 
