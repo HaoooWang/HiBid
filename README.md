@@ -23,6 +23,13 @@ $\lambda$-generalization for adaptive bidding strategy in response to changing b
     pip install -r requirements.txt
     python setup.py develop
     ```
+## :computer: Training
+
+To train HiBid, use:
+
+```
+python main_PPO_vecenv.py --dataset <DATASET_STR> --use_eoi --use_hcopo
+```
 
 ### 
 ### Auction Simulator
