@@ -1,8 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Time    : 2019-12-17 16:06
-# @Author  : shaoguang.csg
-# @File    : model_dataset
 
 import imp
 from re import S
@@ -19,8 +16,8 @@ from tensorflow_serving.apis import predict_pb2
 import os
 import sys
 from higher import MAModel
-CURRENT_DIR = os.path.split(os.path.abspath(__file__))[0]  # 当前目录
-config_path = CURRENT_DIR.rsplit('/', 2)[0]  # 上2级目录
+CURRENT_DIR = os.path.split(os.path.abspath(__file__))[0]  
+config_path = CURRENT_DIR.rsplit('/', 2)[0]  
 sys.path.append(config_path)
 # from rl_easy_go_high.rl_code.main import Trainer
 
@@ -169,11 +166,11 @@ def model_fn(features, labels, mode, params):
         cur_state_dynamic_fea_col = features['cur_state_dynamic_fea']
         next_state_dynamic_fea_col = features['next_state_dynamic_fea']
 
-        budgets = tf.cast(features['real_budget'],tf.float32)/100 # 分-》元 # B,4
+        budgets = tf.cast(features['real_budget'],tf.float32)/100 # B,4
         if task_type in 'low':
             real_click = tf.reduce_sum(tf.cast(features['real_click'],tf.float32),axis=1,keepdims=True )# B,1
-            real_cash = tf.reduce_sum(tf.cast(features['real_cash'],tf.float32),axis=1,keepdims=True)/100  # B,1 分->元
-            aimcpc = tf.reduce_sum(tf.cast(features['aimcpc'],tf.float32),axis=1,keepdims=True)/100  # B,1 分->元
+            real_cash = tf.reduce_sum(tf.cast(features['real_cash'],tf.float32),axis=1,keepdims=True)/100  # B,1 
+            aimcpc = tf.reduce_sum(tf.cast(features['aimcpc'],tf.float32),axis=1,keepdims=True)/100  # B,1 
         reward = tf.cast(features['reward'], tf.float32)
         action_col = tf.cast(features['action'],tf.int64)
 
@@ -237,7 +234,7 @@ def model_fn(features, labels, mode, params):
                     high_next_cate_feature = get_hash_cate_feature(next_state_cate_fea_col,high_prefix,embedding_matrix,high_cate_num,vocab_size,embed_dim,prod_num)
 
                 if task_type in 'low':
-                    # 上层只有poi_id是离散特征
+            
                     high_cate_feature = get_hash_cate_feature(cur_state_cate_fea_col[:,:high_cate_num],high_prefix,embedding_matrix,high_cate_num,vocab_size,embed_dim,prod_num)
                     high_next_cate_feature = get_hash_cate_feature(next_state_cate_fea_col[:,:high_cate_num],high_prefix,embedding_matrix,high_cate_num,vocab_size,embed_dim,prod_num)
 
@@ -245,7 +242,6 @@ def model_fn(features, labels, mode, params):
                     low_next_cate_feature = get_hash_cate_feature(next_state_cate_fea_col,low_prefix,embedding_matrix,low_cate_num,vocab_size,embed_dim,prod_num)
 
 
-        ## TODO 不同渠道的特征划分，由于real_time特征每个渠道全喂了，每个渠道只需要一部分
         ##  shape [B,S,4] -> [B,S-12,4]
 
         high_model = MAModel(deep_layers=deep_layers,num_action=num_action,optimizer='adam',variable_scope='high_controller',learning_rate=learning_rate,
@@ -279,13 +275,12 @@ def model_fn(features, labels, mode, params):
                     use_bcorle=use_bcorle,
                     save_prod=save_prod
                 )
-        # 目前上层不需要lambda求解,lambda_vector_high已废用
+      
         if use_adaptive and task_type in 'high':
             lambda_vector_high = get_calibration_vector(auto_lambda_vector) 
         else:
             lambda_vector_high = [None,None,None,None]
-            lambda_vector_low = [None,None,None,None] # lambda泛化方案求解lambda
-        
+            lambda_vector_low = [None,None,None,None] 
         # if (mode == tf.estimator.ModeKeys.PREDICT or ext_is_predict_serving or not use_bcorle) and task_type not in 'high':
         #     lambda_vector=tf.tile(tf.reshape(tf.ones_like(features['prod'],dtype=tf.float32),[-1,1,1]),[1,1,4])
         #     cur_state_dynamic_fea_col = tf.concat([cur_state_dynamic_fea_col,lambda_vector],axis=1)
@@ -502,7 +497,7 @@ def model_fn(features, labels, mode, params):
                     total_q_logits.get_shape(),total_q_imts.get_shape(),selected_q.get_shape(),target_q.get_shape(),best_actions.get_shape(),best_action_q.get_shape()
                 ))
 
-        is_weights =tf.cast(tf.ones_like(action_col), tf.float32)  # 为后续增加权重做准备，当前是1
+        is_weights =tf.cast(tf.ones_like(action_col), tf.float32)  
 
         error = tf.reduce_mean(tf.abs(target_q - selected_q)) #[256,4] vs. [256]
         q_loss = q_loss_weight * Smooth_L1_Loss(target_q, selected_q, "loss", is_weights)
@@ -668,8 +663,6 @@ def is_update_auto_lambda(global_step, update_interval):
     tf.summary.scalar("is_update_target_lambda", tf.cast(ret, tf.int32))
     return ret
 
-# 生成线上tfserving的输入向量的格式
-# 注意，placeholder的name需要和线上一致！！！！
 def export_serving_model_input(params):
     low_cate_num = len(params['low_state_cate_fea'].split(","))
     low_dynamic_num = len(params['low_state_dynamic_fea'].split(","))
@@ -724,7 +717,7 @@ def custom_estimator(params, config):
     if params['task_type'] in 'low':
         ws = tf.estimator.WarmStartSettings(
             ckpt_to_initialize_from=
-                    params['high_model_dir'],# 或者hdfs路径 
+                    params['high_model_dir'],
             vars_to_warm_start=
                     ['high_controller/.*','model/variable/embed_table/.*'])
     else:

@@ -1,8 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Time    : 2019-12-17 16:06
-# @Author  : shaoguang.csg
-# @File    : util
 
 import logging
 import sys

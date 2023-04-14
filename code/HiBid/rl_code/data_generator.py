@@ -30,22 +30,16 @@ class DataGenerator:
 
     def build_data_spec(self):
 
-        # 使用AfoDataset
-        self.logger.info("使用AfoDataset")
+
         trainset_file_names = None
         validset_file_names = None
 
         train_config = self.config.copy()
-        #        train_config['predict_trick_cate_fea'] = ""  #置为空表示位置特征使用原始值,不需要置为固定值
+        #        train_config['predict_trick_cate_fea'] = "" 
         self.logger.info("train_config %s", train_config)
 
         hooks = []
         
-        # if int(self.config['debug']) and self.flags.job_name == "worker" and self.flags.task_index == 0:
-        #     profile_hook = tf.train.ProfilerHook(save_steps=1000, output_dir=self.config['log_dir'],
-        #                                          show_memory=False)  # timeline 记录执行快慢的hook
-        #     hooks.append(profile_hook)
-
         self.train_input_fn = functools.partial(self.input_fn, trainset_file_names, train_config)
         self.train_spec = tf.estimator.TrainSpec(self.train_input_fn, hooks=hooks)
 
@@ -57,7 +51,7 @@ class DataGenerator:
                                                start_delay_secs=6,
                                                throttle_secs=200)
 
-    # 本地生成的tfrecord格式
+
     def input_fn(self, file_names, config):
 
         self.logger.info('file_names: %s', file_names)
@@ -131,8 +125,8 @@ class DataGenerator:
                         "pvid":_parsed_features["pvid"],
                         "cost": tf.cast(_parsed_features['final_charge'], tf.float32),
                         "origin_reward":_parsed_features["reward"],
-                        "real_click":tf.cast(_parsed_features['real_click'], tf.float32), # 4个渠道的实时特征
-                        "real_cash":tf.cast(_parsed_features['real_csm'], tf.float32), # 4个渠道的实时特征
+                        "real_click":tf.cast(_parsed_features['real_click'], tf.float32), 
+                        "real_cash":tf.cast(_parsed_features['real_csm'], tf.float32), 
                         "aimcpc":_parsed_features['aimcpc'],
                      
                         # high level 每一个mdp就是一条记录，不需要终止flag
@@ -180,7 +174,6 @@ class DataGenerator:
             return parsed_features
 
         if file_names is None:
-            self.logger.info("use afo dataset")
             self.logger.info(int(config['batch_size']))
             dataset = tf.data.AfoShmDataset(int(config['batch_size']),False)
             #dataset = dataset.batch(int(config['batch_size']), drop_remainder=False)

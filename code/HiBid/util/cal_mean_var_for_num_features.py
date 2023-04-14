@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Time    : 2019-04-18 11:07
-# @Author  : shaoguang.csg
-# @File    : cal_mean_var_for_numerical_features.py
+
 
 # coding: utf-8
 import sys

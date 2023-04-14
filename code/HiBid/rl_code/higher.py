@@ -12,8 +12,8 @@ from nets import BCQ_net, Mix_net
 # from tensorflow.contrib.opt import HashAdamOptimizer
 import os
 import sys
-CURRENT_DIR = os.path.split(os.path.abspath(__file__))[0]  # 当前目录
-config_path = CURRENT_DIR.rsplit('/', 2)[0]  # 上2级目录
+CURRENT_DIR = os.path.split(os.path.abspath(__file__))[0]  
+config_path = CURRENT_DIR.rsplit('/', 2)[0]  =
 sys.path.append(config_path)
 
 
@@ -91,7 +91,7 @@ class MAModel:
         q = tf.identity(q,name='extra_q')
         if self.use_action_mask and mask is not None:
             zeros = tf.zeros_like(q,dtype=tf.float32)
-            new_q = tf.where(mask,q,zeros) #TODO 用argmin
+            new_q = tf.where(mask,q,zeros) 
         else:
             new_q = q 
 
