@@ -24,11 +24,16 @@ $\lambda$-generalization for adaptive bidding strategy in response to changing b
     python setup.py develop
     ```
 ## :computer: Training
+To generate dataset, use:
+```
+cd simulator
+python auction_simulator.py
+```
 
 To train HiBid, use:
 ```
 cd /algorithm/HiBid
-python main.py --dataset your_dataset_path --use_cpcas --use_bcorle --bcorle_lambda_num 50 --task_type high
+python main.py --dataset your_dataset_path --use_cpcas --use_bcorle --bcorle_lambda_num 50 --task_type high -constraint_loss_weight 0.01_0.01_0.01_0.01 --u
 ```
 
 ### 
