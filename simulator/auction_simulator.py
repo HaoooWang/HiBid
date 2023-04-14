@@ -1,13 +1,5 @@
 # -*- coding: utf-8 -*-
-'''
-High-level status : Within the past H days, the number of PVs obtained for each I-th channel per day, the daily transaction volume, cost, number of transactions, clicks, successful bids, total bids, daily success rate, click-through rate, conversion rate, budget, target ROI reference value, and real ROI per I-th channel, the total number of PVs for all channels per day, the total transaction volume, cost, number of transactions, clicks, successful bids, total bids, comprehensive success rate, click-through rate, conversion rate, total budget, total target ROI, and total real ROI for all channels per day, and the budget and ROI of the advertise for that day.
-High-level action : Allocate the budget reference value weight, allocate the GMV reference value weight (calculate to obtain the budget ROI reference value).
-High-level reward : The comprehensive click-through rate for the advertise on all channels.
 
-Low-level status information: advertise information in this channel: advertise ID, the current day's PV number, current bidding day, current channel, the number of PVs for the current channel, user type, user preference distribution for the type of advertise, user preference distribution for the channel, advertise type, advertise average CTR/CVR/GMV, the current day's transaction volume, cost, number of transactions, clicks, successful bids, total bids, daily success rate, click-through rate, conversion rate, budget reference value, GMV reference value, ROI reference value, remaining amount relative to budget reference value, and achieved ROI.
-Information of other channels: The number of PVs obtained for the I-th channel, the daily transaction volume, cost, number of transactions, clicks, successful bids, total bids, daily success rate, click-through rate, conversion rate, budget reference value, GMV reference value, ROI reference value, remaining amount relative to budget reference value, and achieved ROI for the advertise on the I-th channel.
-Comprehensive advertise information: The total transaction volume, cost, number of transactions, clicks, successful bids, total bids, comprehensive success rate, click-through rate, conversion rate, total budget, total ROI, remaining budget of the advertise, and current achieved ROI for the advertise on all channels.
-'''
 import argparse
 import numpy as np
 import random
