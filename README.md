@@ -33,7 +33,9 @@ python auction_simulator.py
 To train HiBid, use:
 ```
 cd /algorithm/HiBid
-python main.py --dataset your_dataset_path --use_cpcas --use_bcorle --bcorle_lambda_num 50 --task_type high -constraint_loss_weight 0.01_0.01_0.01_0.01 --u
+python main.py --dataset your_dataset_path --task_type high -constraint_loss_weight 0.01_0.01_0.01_0.01 --use_batch_loss  --gamma 1 --embed_dim
+python main.py --dataset your_dataset_path --task_type low --use_cpcas --use_bcorle --bcorle_lambda_num 50 -constraint_loss_weight 0.01_0.01_0.01_0.01 --use_batch_loss
+ 
 ```
 
 ### 
