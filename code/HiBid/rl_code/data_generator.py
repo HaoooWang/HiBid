@@ -119,7 +119,6 @@ class DataGenerator:
                 }
 
                 if config['task_type'] in "low":
-
                     final_parsed_features.update({
                         "prod": _parsed_features["prod"],
                         "pvid":_parsed_features["pvid"],

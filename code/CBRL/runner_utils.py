@@ -12,7 +12,7 @@ import pickle as pkl
 from collections import deque
 sys.path.append(os.getcwd()+'/src')
 # import auction_simulator
-from auction_simulator import pre_run_slot_generator
+from code.auction_simulator import pre_run_slot_generator
 import itertools
 
 class interfaces():

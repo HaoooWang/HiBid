@@ -2,7 +2,7 @@ import sys,os
 import gym
 sys.path.append(os.getcwd()+'/src')
 
-from auction_simulator import Observation
+from code.auction_simulator import Observation
 from collections.abc import Sequence
 
 from dqn import DQN
