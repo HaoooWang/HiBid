@@ -51,6 +51,8 @@ The synthetic dataset is avalable on https://drive.google.com/drive/folders/11Tm
 
 - **User feedback simulation.** After the ad auction is finished, the simulator samples the user feedback towards the displayed ads from multiple Gaussian distribution, including whether the user clicks, makes order, and the making order amount. Then we update the advertiser's daily statistics (i.e., real-time CTR, CVR, budget consumption, the number of clicks, etc), to simulate the real-time feature on the platform.
 
+
+
 ## :clap: Reference
 We express gratitude for the open-source code of the baseline methods mentioned in our paper, which are listed below:
 - CBRL (https://github.com/HaozheJasper/CBRL_KDD22)
