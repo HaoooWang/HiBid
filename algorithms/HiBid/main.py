@@ -139,7 +139,7 @@ class Trainer(object):
             'use_bcorle':FLAGS.use_bcorle,
             "use_adaptive":FLAGS.use_adaptive,
             "use_batch_loss":FLAGS.use_batch_loss,
-            "use_mask":FLAGS.use_mask,
+            "use_mask":FLAGS.use_cpcas,
 
             "lambda_alpha":FLAGS.lambda_alpha,
             "lambda_update_interval":FLAGS.lambda_update_interval,
