@@ -1,2 +1,8 @@
 tensorflow
 numpy
+datetime
+imageio
+keras
+pandas
+matplotlib
+imageio

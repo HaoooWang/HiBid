@@ -29,6 +29,7 @@ $\lambda$-generalization for adaptive bidding strategy in response to changing b
     ```
 
 ### Auction Simulator
+The synthetic dataset are avalable on https://drive.google.com/drive/folders/11TmSXZFtwiXhy1kyQdvEvzc5Mu-cHI7S?usp=share_link.
 
 - **Advertisers and ad requests initialization**. The simulator first randomly generate some advertisers, who are categorized into 20 types denotes the varying business conditions of advertisers. Each advertisers possesses a total budget, expected CPC, historical CTR, CVR, GMV etc., which are sampled from a Gaussian distribution based on their respective category. Then, the simulator initializes the total ad requests in a day, each of which belongs to one of 4 channels. Note that the number of ad requests and arrival distribution of each channel are kept relatively consistent with the online platform. Subsequently, the simulator replays these ad requests in chronological order and simulates advertisers' auction as follow.
 
@@ -37,8 +38,6 @@ $\lambda$-generalization for adaptive bidding strategy in response to changing b
 - **Advertisers bidding and ranking.** The base bidding strategy deployed in the simulator is the CTR-based bidding (i.e., bidding with $P(click|ad, advertiser)*CPC_m^{set}$). The simulator applies that bidding strategy to all of the selected advertisers and sorts them in descending order based on their bidding price. The advertiser with the highest bidding wins this ad and have the chance to display ad. Note that the simulator deployed GSP auction with CPC pricing same as the online platform, which means that only if the user clicks ad, the displayed advertiser will be charged with the price of the second-highest bid.
 
 - **User feedback simulation.** After the ad auction is finished, the simulator samples the user feedback towards the displayed ads from multiple Gaussian distribution, including whether the user clicks, makes order, and the making order amount. Then we update the advertiser's daily statistics (i.e., real-time CTR, CVR, budget consumption, the number of clicks, etc), to simulate the real-time feature on the platform.
-
-
 
 ## :clap: Reference
 We express gratitude for the open-source code of the baseline methods mentioned in our paper, which are listed below:
