@@ -9,7 +9,7 @@ $\lambda$-generalization for adaptive bidding strategy in response to changing b
 ### Installation
 1. Clone repo
     ```bash
-    git clone -c git@github.com:HaoooWang/HiBid.git
+    git clone https://github.com/HaoooWang/HiBid.git
     cd HiBid
     ```
    
