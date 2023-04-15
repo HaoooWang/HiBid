@@ -40,7 +40,7 @@ python main.py --train_data dataset_path --task_type low --use_cpcas --use_bcorl
 
 ### Dataset
 The experimental dataset is presently inaccessible due to privacy regulations.
-The synthetic dataset is avalable on https://drive.google.com/drive/folders/11TmSXZFtwiXhy1kyQdvEvzc5Mu-cHI7S?usp=share_link.
+The synthetic dataset is available on https://drive.google.com/drive/folders/11TmSXZFtwiXhy1kyQdvEvzc5Mu-cHI7S?usp=share_link.
 ### Auction Simulator
 
 - **Advertisers and ad requests initialization**. The simulator first randomly generate some advertisers, who are categorized into 20 types denotes the varying business conditions of advertisers. Each advertisers possesses a total budget, expected CPC, historical CTR, CVR, GMV etc., which are sampled from a Gaussian distribution based on their respective category. Then, the simulator initializes the total ad requests in a day, each of which belongs to one of 4 channels. Note that the number of ad requests and arrival distribution of each channel are kept relatively consistent with the online platform. Subsequently, the simulator replays these ad requests in chronological order and simulates advertisers' auction as follow.
